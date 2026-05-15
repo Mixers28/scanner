@@ -47,6 +47,7 @@ if _HAS_WIN32:
         _svc_name_ = _SERVICE_NAME
         _svc_display_name_ = _SERVICE_DISPLAY
         _svc_description_ = _SERVICE_DESCRIPTION
+        _svc_reg_class_ = "scanner.service.win_service._ScannerWinService"
 
         def __init__(self, args: list) -> None:
             super().__init__(args)
