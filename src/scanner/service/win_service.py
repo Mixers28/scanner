@@ -60,6 +60,7 @@ if _HAS_WIN32:
                 self._svc.stop()
 
         def SvcDoRun(self) -> None:
+            import os
             from scanner.common.config import DEFAULT_CONFIG
             from scanner.service.orchestrator import ScannerService
 
@@ -69,10 +70,17 @@ if _HAS_WIN32:
                 (self._svc_name_, ""),
             )
 
-            db_path = Path(sys.prefix) / "scanner" / "scanner.db"
+            db_path = Path(
+                os.environ.get("SCANNER_DB_PATH",
+                               str(Path(sys.prefix) / "scanner" / "scanner.db"))
+            )
             db_path.parent.mkdir(parents=True, exist_ok=True)
 
-            self._svc = ScannerService(db_path=db_path)
+            self._svc = ScannerService(
+                db_path=db_path,
+                hub_url=os.environ.get("SCANNER_HUB_URL", ""),
+                hub_api_key=os.environ.get("SCANNER_HUB_API_KEY", ""),
+            )
             self._svc.start()
 
             interval_ms = DEFAULT_CONFIG["collector"].get(
@@ -106,7 +114,13 @@ def install_service() -> int:
             description=_SERVICE_DESCRIPTION,
         )
         print(f"Service '{_SERVICE_NAME}' installed successfully.")
-        print(f"Start it with: net start {_SERVICE_NAME}")
+        print()
+        print("Set these SYSTEM environment variables before starting:")
+        print("  SCANNER_HUB_URL      - hub server URL")
+        print("  SCANNER_HUB_API_KEY  - shared API key")
+        print("  SCANNER_DB_PATH      - path to scanner.db (optional)")
+        print()
+        print(f"Then start with:  net start {_SERVICE_NAME}")
         return 0
     except Exception as exc:
         print(f"Failed to install service: {exc}")
