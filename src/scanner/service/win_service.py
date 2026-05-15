@@ -107,7 +107,7 @@ def install_service() -> int:
     _check_win32()
     try:
         win32serviceutil.InstallService(
-            _ScannerWinService._svc_reg_class_,
+            "scanner.service.win_service._ScannerWinService",
             _SERVICE_NAME,
             _SERVICE_DISPLAY,
             startType=win32service.SERVICE_AUTO_START,
