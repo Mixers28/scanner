@@ -1,0 +1,14 @@
+tests/
+docs/
+handoffkit/
+reports/
+hub_data/
+*.db
+*.pyc
+__pycache__/
+.pytest_cache/
+.claude/
+.codex
+CLAUDE.md
+SPEC.md
+spec_v01.md

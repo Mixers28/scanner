@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Tests / tooling
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Runtime data
+*.db
+hub_data/
+reports/
+
+# Env / secrets
+.env
+*.env

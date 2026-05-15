@@ -1,0 +1,33 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Test Suite",
+      "type": "shell",
+      "command": "python3",
+      "args": ["-m", "pytest", "-q"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Scanner Smoke Run",
+      "type": "shell",
+      "command": "bash",
+      "args": ["-lc", "PYTHONPATH=src python3 -m scanner run --db scanner.db --max-cycles 1 --log-level WARNING"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Scanner Status",
+      "type": "shell",
+      "command": "bash",
+      "args": ["-lc", "PYTHONPATH=src python3 -m scanner status --db scanner.db"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Export Latest Report Template",
+      "type": "shell",
+      "command": "bash",
+      "args": ["-lc", "echo 'Use: PYTHONPATH=src python3 -m scanner export-report --incident <incident_id> --db scanner.db --out-dir reports'"],
+      "problemMatcher": []
+    }
+  ]
+}

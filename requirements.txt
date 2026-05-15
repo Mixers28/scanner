@@ -1,0 +1,6 @@
+psutil>=5.9,<8
+
+# Hub server (install on the hub machine only)
+# pip install "scanner[hub]"
+fastapi>=0.110,<1
+uvicorn>=0.29,<1
